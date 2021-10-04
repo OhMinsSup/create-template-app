@@ -6,5 +6,5 @@ boilerplate:
     bucketTags: {
       service: boilerplate-next
     }
-    # cloudfront:
-    #   distributionId:
+    cloudfront:
+      distributionId: E30YQ4T6QSQ1DY
