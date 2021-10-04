@@ -4,23 +4,7 @@ module.exports = {
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: [
-    '/html/*',
-    '/art/[*]/histories/*',
-    '/art/[*]/offer/*',
-    '/art/[*]/sale/*',
-    '/art/regist',
-    '/creator/regist',
-    '/find-email/*',
-    '/find-password/*',
-    '/payment/*',
-    '/email-verification',
-    '/myinfo_modify',
-    '/pay-complete',
-    '/login',
-    '/signup',
-    '/404',
-  ],
+  exclude: [],
   // Default transformation function
   robotsTxtOptions: {
     policies: [
