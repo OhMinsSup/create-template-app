@@ -1,0 +1,10 @@
+boilerplate:
+  component: '@sls-next/serverless-component'
+  inputs:
+    bucketRegion: ap-northeast-2
+    bucketName: boilerplate-next
+    bucketTags: {
+      service: boilerplate-next
+    }
+    # cloudfront:
+    #   distributionId:

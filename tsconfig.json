@@ -1,0 +1,36 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "target": "esnext",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "jsxImportSource": "@emotion/react",
+    "typeRoots": ["./node_modules/@types", "type"],
+    "paths": {
+      "@contexts/*": ["src/contexts/*"],
+      "@assets/*": ["src/assets/*"],
+      "@libs/*": ["src/libs/*"],
+      "@utils/*": ["src/utils/*"],
+      "@contants/*": ["src/constants/*"],
+      "@components/*": ["src/components/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@api/*": ["src/api/*"],
+      "@provider/*": ["src/provider/*"],
+      "@locales/*": ["src/locales/*"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],
+  "exclude": ["node_modules", ".next", "out"]
+}

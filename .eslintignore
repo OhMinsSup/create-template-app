@@ -1,0 +1,9 @@
+node_modules
+public
+.vscode
+server/
+.DS_Store
+.serverless
+.serverless_nextjs
+.next
+out

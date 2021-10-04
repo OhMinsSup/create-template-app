@@ -1,0 +1,5 @@
+declare module '@multiavatar/multiavatar/esm' {
+  export default function (arg: string): string;
+}
+
+declare module 'filepond-plugin-media-preview';
