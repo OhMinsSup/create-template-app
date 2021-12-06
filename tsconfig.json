@@ -16,7 +16,6 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "jsxImportSource": "@emotion/react",
     "typeRoots": ["./node_modules/@types", "type"],
     "paths": {
       "@contexts/*": ["src/contexts/*"],
