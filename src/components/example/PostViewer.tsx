@@ -1,5 +1,5 @@
 import React from 'react';
-import { ExampleSchema } from 'type/schema/example';
+import type { ExampleSchema } from '@api/schema/example';
 
 interface PostViewerProps {
   post: ExampleSchema;

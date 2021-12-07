@@ -1,6 +1,6 @@
 import React from 'react';
 import Post from './Post';
-import type { ExampleSchema } from 'type/schema/example';
+import type { ExampleSchema } from '@api/schema/example';
 
 interface PostListProps {
   posts: ExampleSchema[];

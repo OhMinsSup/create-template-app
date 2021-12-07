@@ -13,7 +13,7 @@ import { api } from '@api/module';
 
 // types
 import type { InferGetStaticPropsType } from 'next';
-import type { ExampleSchema } from 'type/schema/example';
+import type { ExampleSchema } from '@api/schema/example';
 
 const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
   ssr: false,

@@ -18,16 +18,15 @@
     "incremental": true,
     "typeRoots": ["./node_modules/@types", "type"],
     "paths": {
-      "@contexts/*": ["src/contexts/*"],
-      "@assets/*": ["src/assets/*"],
-      "@libs/*": ["src/libs/*"],
-      "@utils/*": ["src/utils/*"],
-      "@contants/*": ["src/constants/*"],
-      "@components/*": ["src/components/*"],
-      "@hooks/*": ["src/hooks/*"],
       "@api/*": ["src/api/*"],
+      "@assets/*": ["src/assets/*"],
+      "@components/*": ["src/components/*"],
+      "@contants/*": ["src/constants/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@libs/*": ["src/libs/*"],
+      "@locales/*": ["src/locales/*"],
       "@provider/*": ["src/provider/*"],
-      "@locales/*": ["src/locales/*"]
+      "@utils/*": ["src/utils/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.d.ts", "**/*.ts", "**/*.tsx", "**/*.js"],

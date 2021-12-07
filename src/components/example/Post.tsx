@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import type { ExampleSchema } from 'type/schema/example';
+import type { ExampleSchema } from '@api/schema/example';
 
 interface PostProps {
   post: ExampleSchema;
