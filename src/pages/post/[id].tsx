@@ -1,18 +1,26 @@
 import React from 'react';
+import dynamic from 'next/dynamic';
+
+// hooks
 import useSWR from 'swr';
 import { useRouter } from 'next/router';
 
-import AppLayout from '@components/example/AppLayout';
+// components
 import PostViewer from '@components/example/PostViewer';
 
+// api
 import { api } from '@api/module';
 
-import type { PostModel } from 'type/app-api';
 import type { InferGetStaticPropsType } from 'next';
+import type { ExampleSchema } from 'type/schema/example';
+
+const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
+  ssr: false,
+});
 
 // This function gets called at build time
 export async function getStaticPaths() {
-  const { data: posts } = await api.getMockResponse<PostModel[]>(
+  const { data: posts } = await api.getMockResponse<ExampleSchema[]>(
     'posts?page=1&limit=10',
   );
 
@@ -30,7 +38,7 @@ export async function getStaticPaths() {
 export async function getStaticProps({ params }: any) {
   // params contains the post `id`.
   // If the route is like /posts/1, then params.id is 1
-  const { data: post } = await api.getMockResponse<PostModel>(
+  const { data: post } = await api.getMockResponse<ExampleSchema>(
     `posts/${params.id}`,
   );
 
@@ -42,13 +50,20 @@ function Post({ post }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
   const id = router.query.id?.toString() ?? null;
 
-  const { data, error } = useSWR<PostModel>(
-    id ? `posts/${id}` : null,
-    (url: string) => api.getMockResponse(url).then((data) => data.data),
-    {
-      fallbackData: post,
-    },
-  );
+  const getKey = () => {
+    if (!id) return null;
+    return `posts/${id}`;
+  };
+
+  const wrappedFetcher = async (url: string) => {
+    const response = await api.getMockResponse(url).then((data) => data.data);
+    if (!response) return null;
+    return response;
+  };
+
+  const { data, error } = useSWR<ExampleSchema>(getKey, wrappedFetcher, {
+    fallbackData: post,
+  });
 
   if (router.isFallback) {
     return <div>Loading...</div>;

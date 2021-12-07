@@ -1,7 +1,10 @@
 import React from 'react';
-import type { PostModel } from 'type/app-api';
+import { ExampleSchema } from 'type/schema/example';
 
-const PostViewer: React.FC<{ post: PostModel }> = ({ post }) => {
+interface PostViewerProps {
+  post: ExampleSchema;
+}
+const PostViewer: React.FC<PostViewerProps> = ({ post }) => {
   return (
     <div className="post-viewer">
       <h1 className="title">{post.title}</h1>

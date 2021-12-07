@@ -1,7 +1,11 @@
 import React from 'react';
 import Post from './Post';
+import type { ExampleSchema } from 'type/schema/example';
 
-const PostList: React.FC<{ posts: any[] }> = ({ posts }) => {
+interface PostListProps {
+  posts: ExampleSchema[];
+}
+const PostList: React.FC<PostListProps> = ({ posts }) => {
   return (
     <div className="post-list">
       {posts.map((post) => (

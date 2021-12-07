@@ -1,9 +1,15 @@
+// components
 import Head from 'next/head';
 import Image from 'next/image';
+import dynamic from 'next/dynamic';
+// styles
 import styles from '@assets/home.module.css';
-import type { NextPage } from 'next';
 
-const Home: NextPage = () => {
+const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
+  ssr: false,
+});
+
+const Home = () => {
   return (
     <div className={styles.container}>
       <Head>
@@ -70,3 +76,5 @@ const Home: NextPage = () => {
 };
 
 export default Home;
+
+Home.Layout = AppLayout;

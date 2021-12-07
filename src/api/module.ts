@@ -6,7 +6,7 @@ import { STORAGE_KEY } from '@contants/constant';
 import i18n from '@locales/i18n';
 
 // types
-import type { Options, Params, appAPI } from 'type/app-api';
+import type { Options, Params, AppAPI } from 'type/app-api';
 
 class APIMoudle {
   authorized(options?: Partial<Options>) {
@@ -22,7 +22,7 @@ class APIMoudle {
   }: Params) {
     const authorization = this.authorized(options);
     const language = typeof window === 'undefined' ? null : i18n.language;
-    const result = await client.delete<appAPI<D, E>>(url, {
+    const result = await client.delete<AppAPI<D, E>>(url, {
       headers: {
         'Content-Type': 'application/json',
         ...(language && {
@@ -45,7 +45,7 @@ class APIMoudle {
   }: Params) {
     const authorization = this.authorized(options);
     const language = typeof window === 'undefined' ? null : i18n.language;
-    const result = await client.post<appAPI<D, E>>(url, body, {
+    const result = await client.post<AppAPI<D, E>>(url, body, {
       headers: {
         'Content-Type': 'application/json',
         ...(language && {
@@ -68,7 +68,7 @@ class APIMoudle {
   }: Params) {
     const authorization = this.authorized(options);
     const language = typeof window === 'undefined' ? null : i18n.language;
-    const result = await client.put<appAPI<D, E>>(url, body, {
+    const result = await client.put<AppAPI<D, E>>(url, body, {
       headers: {
         'Content-Type': 'application/json',
         ...(language && {
@@ -91,7 +91,7 @@ class APIMoudle {
     const isServer = typeof window === 'undefined';
     const authorization = isServer ? null : this.authorized(options);
     const language = isServer ? null : i18n.language;
-    const result = await client.get<appAPI<D, E>>(url, {
+    const result = await client.get<AppAPI<D, E>>(url, {
       headers: {
         'Content-Type': 'application/json',
         ...(language && {

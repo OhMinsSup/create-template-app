@@ -5,15 +5,9 @@ import type {
   GetStaticPropsContext,
 } from 'next';
 
-// ================== Storage ================== //
-
-export interface StorageUserInfo {}
-
-export interface StorageSocialTemp {}
-
 // ================== Common =================== //
 
-export interface ResponseModel<DataModel = any, ErrorModel = any> {
+export interface ResponseSchema<DataModel = any, ErrorModel = any> {
   header: {
     resultCode: number;
     resultMessage: string;
@@ -22,10 +16,7 @@ export interface ResponseModel<DataModel = any, ErrorModel = any> {
   errorData: ErrorModel | null;
 }
 
-export type appAPI<DataModel = any, ErrModel = any> = ResponseModel<
-  DataModel,
-  ErrModel
->;
+export type AppAPI<Data = any, Err = any> = ResponseSchema<Data, Err>;
 
 export interface Options<Data = any> {
   fallbackData?: Data | null;
@@ -40,22 +31,10 @@ export interface Options<Data = any> {
 export interface Params<Body = any> {
   url: string;
   body?: Body;
-  headers?: {
-    [key: string]: string;
-  };
+  headers?: Record<string, string>;
   options?: Options;
 }
 
-export type SWR<Item = any, Error = any> = AxiosResponse<appAPI<Item, Error>>;
+export type SWR<Item = any, Error = any> = AxiosResponse<AppAPI<Item, Error>>;
 
 export type SWRMock<Item = any> = AxiosResponse<Item>;
-
-// ================== Example =================== //
-
-export interface PostModel {
-  createdAt: string;
-  username: string;
-  title: string;
-  body: string;
-  id: string;
-}

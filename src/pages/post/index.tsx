@@ -1,20 +1,29 @@
 import { useCallback, useState } from 'react';
+import dynamic from 'next/dynamic';
+
+// hooks
 import useSWR from 'swr';
 
-import AppLayout from '@components/example/AppLayout';
+// components
 import Post from '@components/example/Post';
 import Pagination from '@components/example/Pagination';
 
+// api
 import { api } from '@api/module';
 
+// types
 import type { InferGetStaticPropsType } from 'next';
-import type { PostModel } from 'type/app-api';
+import type { ExampleSchema } from 'type/schema/example';
+
+const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
+  ssr: false,
+});
 
 // 이 함수는 서버 측에서 빌드시 호출됩니다.
 // 서버리스 함수에서 다시 호출 될 수 있습니다.
 // 재 검증이 활성화되고 새 요청이 들어옵니다
 export async function getStaticProps() {
-  const { data: posts } = await api.getMockResponse<PostModel[]>(
+  const { data: posts } = await api.getMockResponse<ExampleSchema[]>(
     'posts?page=1&limit=10',
   );
 
@@ -31,7 +40,7 @@ export async function getStaticProps() {
 
 function PostPage({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   const [page, setPage] = useState(1);
-  const { data, error } = useSWR<PostModel[]>(
+  const { data, error } = useSWR<ExampleSchema[]>(
     `posts?page=${page}&limit=10`,
     (url: string) => api.getMockResponse(url).then((data) => data.data),
     {

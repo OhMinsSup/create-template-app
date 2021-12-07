@@ -26,7 +26,9 @@ const AppLayout: React.FC = ({ children }) => {
           </Menu.Item>
         </Menu>
       </Layout.Header>
-      <Layout.Content className="app">{children}</Layout.Content>
+      <Layout.Content style={{ background: '#ffff' }}>
+        {children}
+      </Layout.Content>
     </Layout>
   );
 };

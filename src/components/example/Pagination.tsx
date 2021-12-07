@@ -1,12 +1,18 @@
 import React from 'react';
 import { LeftOutlined, RightOutlined } from '@ant-design/icons';
 
-const Pagination: React.FC<{
+interface PaginationProps {
   page?: number;
   lastPage: number;
   fetchNextPage: () => void;
   fetchPrevPage: () => void;
-}> = ({ page = 1, lastPage, fetchNextPage, fetchPrevPage }) => {
+}
+const Pagination: React.FC<PaginationProps> = ({
+  page = 1,
+  lastPage,
+  fetchNextPage,
+  fetchPrevPage,
+}) => {
   return (
     <div className="pagination">
       {page === 1 ? (
