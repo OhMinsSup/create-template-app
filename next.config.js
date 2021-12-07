@@ -20,7 +20,7 @@ const nextConfig = {
   // * 주소 뒤에 슬래시를 붙일지 여부입니다.
   trailingSlash: true,
 
-  experimental: { granularChunks: true },
+  // experimental: { granularChunks: true },
 
   images: {
     domains: [], // 외부 웹사이트 이미지인경우, 이미지 src 의 도메인을 옵션에 명시

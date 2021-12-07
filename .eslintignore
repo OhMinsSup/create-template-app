@@ -1,6 +1,7 @@
 node_modules
 public
 .vscode
+next.config.js
 server/
 .DS_Store
 .serverless

@@ -4,7 +4,6 @@ import '@assets/scss/main.scss';
 import 'moment/locale/ko';
 
 import React from 'react';
-import moment from 'moment';
 
 import AppProvider from '@provider/AppProvider';
 import { SEO } from '@components/common/SEO';
@@ -13,8 +12,6 @@ import { SEO } from '@components/common/SEO';
 import * as Sentry from '@sentry/browser';
 import { Integrations } from '@sentry/tracing';
 
-import i18n from '@locales/i18n';
-import { LANG_TYPE } from '@contants/constant';
 import { SENTRY_DSN, IS_PROD, IS_DEPLOY_GROUP_PROD } from '@contants/env';
 
 // types
@@ -33,10 +30,6 @@ Sentry.init({
 const Noop: React.FC = ({ children }) => <>{children}</>;
 
 function AppPage({ Component, pageProps }: AppProps) {
-  const lang = i18n.language || LANG_TYPE.KO;
-
-  moment.locale(lang);
-
   const Layout = (Component as any).Layout || Noop;
 
   return (
