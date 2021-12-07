@@ -1,2 +1,1 @@
-export { default as getAnalytics } from './analytics';
-export { default as logger } from './logger';
+export { default as analytics } from './analytics';

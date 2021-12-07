@@ -1,8 +1,3 @@
-export const LANG_TYPE = {
-  KO: 'ko',
-  EN: 'en',
-};
-
 export const API_ENDPOINTS = {
   NPLANET: {
     STORE: {

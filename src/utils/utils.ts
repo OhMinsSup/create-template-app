@@ -1,37 +1,31 @@
 import multiavatar from '@multiavatar/multiavatar/esm';
 import qs from 'qs';
 import { STORAGE_KEY } from '@contants/constant';
+import { AxiosError } from 'axios';
 
-export const makeQueryString = (params: any) => {
-  const stringify = qs.stringify(params, {
+export const makeQueryString = (params: any) =>
+  qs.stringify(params, {
     arrayFormat: 'comma',
     skipNulls: true,
     addQueryPrefix: true,
   });
-  return stringify;
-};
 
-export const getUniqueFilter = (
-  iters: { [key: string]: any }[],
-  key: string,
-) => {
-  return Array.from(
+export const getUniqueFilter = (iters: { [key: string]: any }[], key: string) =>
+  Array.from(
     iters.reduce((map, obj) => map.set(obj[key], obj), new Map()).values(),
   );
-};
 
-export const fn = (args: any) => args;
-
-export function isAxiosError(error: any) {
-  return !!error.data || !!error.response;
+export function isAxiosError<R = any>(
+  error: AxiosError | any,
+): error is AxiosError<R> {
+  return error && error.isAxiosError && error.response;
 }
 
 export const delay = (ms: number) =>
   new Promise((resolve) => setTimeout(resolve, ms));
 
-export const generateAvatarKey = () => {
-  const avatarKey = Math.random().toString(36).substr(2, 11);
-  return avatarKey;
+export const generateKey = () => {
+  return Math.random().toString(36).substr(2, 11);
 };
 
 export const generateAvatar = (avatarKey: string) => {

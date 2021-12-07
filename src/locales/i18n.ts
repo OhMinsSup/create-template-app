@@ -2,10 +2,11 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import { LANG_TYPE } from '@contants/constant';
-
 import en from './lang/en';
 import ko from './lang/ko';
+
+export const fallbackLng = 'ko';
+export const fallbackLngs = ['ko', 'en'];
 
 i18n
   // 사용자 언어 감지
@@ -25,11 +26,16 @@ i18n
       ko,
     },
 
-    fallbackLng: LANG_TYPE.KO,
+    fallbackLng: fallbackLng,
+    supportedLngs: fallbackLngs,
     debug: false,
 
     interpolation: {
       escapeValue: false, // not needed for react as it escapes by default
+    },
+
+    react: {
+      bindI18n: 'languageChanged',
     },
   });
 
