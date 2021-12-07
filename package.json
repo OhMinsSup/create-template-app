@@ -10,16 +10,16 @@
     "build:dev": "dotenv -e .env.development next build && next export",
     "build:prod": "dotenv -e .env.production next build && next export",
     "build:analyze": "cross-env ANALYZE=true NODE_ENV=production next build",
-    "deploy:dev": "serverless --stage=dev",
-    "deploy:prod": "serverless --stage=prod",
-    "lint:types": "tsc --noEmit",
-    "lint": "next lint",
-    "lint:fix": "yarn lint -- --fix",
-    "prettier:fix": "prettier --config .prettierrc --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
-    "unused": "next-unused",
+    "deploy:dev": "dotenv -e .env.development serverless",
+    "deploy:prod": "dotenv -e .env.production serverless",
+    "eslint": "next lint",
+    "eslint-fix": "next lint --fix",
+    "prettier": "prettier --list-different '**/*.{js,jsx,md,ts,tsx}'",
+    "prettier-fix": "prettier --write '**/*.{js,jsx,md,ts,tsx}'",
     "test:watch": "jest --watch",
     "test:ci": "jest --ci",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "prepare": "husky install"
   },
   "sideEffects": false,
   "engines": {
@@ -111,12 +111,7 @@
     }
   },
   "lint-staged": {
-    "*.{js,ts,tsx}": [
-      "yarn lint:fix",
-      "yarn prettier:fix"
-    ],
-    "*.{md,json,yml}": [
-      "prettier --write"
-    ]
+    "*.{js,jsx,ts,tsx}": "next lint --fix",
+    "*.{js,jsx,ts,tsx,md}": "prettier --write"
   }
 }
