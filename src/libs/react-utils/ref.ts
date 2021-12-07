@@ -1,8 +1,8 @@
-import { isFunction } from '../utils'
+import { isFunction } from '@utils/assertion';
 
-import type { Ref, RefObject, MutableRefObject } from 'react'
+import type { Ref, RefObject, MutableRefObject } from 'react';
 
-type ReactRef<T> = Ref<T> | RefObject<T> | MutableRefObject<T>
+type ReactRef<T> = Ref<T> | RefObject<T> | MutableRefObject<T>;
 
 /**
  * 참조 함수 또는 객체에 값을 할당
@@ -10,18 +10,18 @@ type ReactRef<T> = Ref<T> | RefObject<T> | MutableRefObject<T>
  * @param value 값
  */
 export function assignRef<T>(ref: ReactRef<T> | undefined, value: T): void {
-  if (ref == null) return
+  if (ref == null) return;
 
   if (isFunction(ref)) {
-    ref(value)
-    return
+    ref(value);
+    return;
   }
 
   try {
     // @ts-ignore
-    ref.current = value
+    ref.current = value;
   } catch (error) {
-    throw new Error(`Cannot assign value '${value}' to ref '${ref}'`)
+    throw new Error(`Cannot assign value '${value}' to ref '${ref}'`);
   }
 }
 
@@ -33,6 +33,6 @@ export function assignRef<T>(ref: ReactRef<T> | undefined, value: T): void {
  */
 export function mergeRefs<T>(...refs: (ReactRef<T> | undefined)[]) {
   return (node: T | null) => {
-    refs.forEach((ref) => assignRef(ref, node))
-  }
+    refs.forEach((ref) => assignRef(ref, node));
+  };
 }
