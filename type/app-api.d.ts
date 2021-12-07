@@ -46,13 +46,6 @@ export interface Params<Body = any> {
   options?: Options;
 }
 
-export interface UploadParams {
-  file: File;
-  storeType: any;
-  resize?: boolean;
-  fileIdx?: number;
-}
-
 export type SWR<Item = any, Error = any> = AxiosResponse<appAPI<Item, Error>>;
 
 export type SWRMock<Item = any> = AxiosResponse<Item>;
