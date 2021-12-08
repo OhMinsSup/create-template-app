@@ -7,6 +7,7 @@ import React from 'react';
 
 import AppProvider from '@provider/AppProvider';
 import { SEO } from '@components/common/SEO';
+import { Head } from '@components/common/Head';
 
 // sentry
 import * as Sentry from '@sentry/browser';
@@ -35,6 +36,7 @@ function AppPage({ Component, pageProps }: AppProps) {
   return (
     <>
       <SEO />
+      <Head />
       <AppProvider>
         <Layout pageProps={pageProps}>
           <Component {...pageProps} />
