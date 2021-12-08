@@ -7,7 +7,7 @@ import type {
 
 // ================== Common =================== //
 
-export interface ResponseSchema<DataModel = any, ErrorModel = any> {
+export interface Schema<DataModel = any, ErrorModel = any> {
   header: {
     resultCode: number;
     resultMessage: string;
@@ -16,7 +16,7 @@ export interface ResponseSchema<DataModel = any, ErrorModel = any> {
   errorData: ErrorModel | null;
 }
 
-export type AppAPI<Data = any, Err = any> = ResponseSchema<Data, Err>;
+export type AppAPI<Data = any, Err = any> = Schema<Data, Err>;
 
 export interface Options<Data = any> {
   fallbackData?: Data | null;
