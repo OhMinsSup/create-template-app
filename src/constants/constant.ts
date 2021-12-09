@@ -12,6 +12,10 @@ export const API_ENDPOINTS = {
 
 export const PAGE_ENDPOINTS = {
   INDEX: '/',
+  EXAMPLE: {
+    ROOT: '/example/',
+    DETAIL: (id: string | number) => `/example/${id}`,
+  },
 };
 
 export const STATUS_CODE = {

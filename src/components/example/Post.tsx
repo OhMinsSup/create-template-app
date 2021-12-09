@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import type { ExampleSchema } from '@api/schema/example';
+import { PAGE_ENDPOINTS } from '@contants/constant';
 
 interface PostProps {
   post: ExampleSchema;
@@ -8,7 +9,7 @@ interface PostProps {
 const Post: React.FC<PostProps> = ({ post }) => {
   return (
     <div className="post-item" key={post.id}>
-      <Link href={`/post/${post.id}`}>
+      <Link href={PAGE_ENDPOINTS.EXAMPLE.DETAIL(post.id)}>
         <a className="title">{post.title}</a>
       </Link>
       <div className="meta">
