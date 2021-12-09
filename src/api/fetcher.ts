@@ -2,7 +2,7 @@
 import { api } from './module';
 
 // types
-import type { Options } from 'type/app-api';
+import type { Options } from 'global-types/app-api';
 
 export const fetcher = async <R = any, E = any>(
   url: string,

@@ -16,7 +16,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "typeRoots": ["./node_modules/@types", "type"],
+    "typeRoots": ["./node_modules/@types", "global-types"],
     "paths": {
       "@api/*": ["src/api/*"],
       "@assets/*": ["src/assets/*"],

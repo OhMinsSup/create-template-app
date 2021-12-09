@@ -6,7 +6,7 @@ import { STORAGE_KEY } from '@contants/constant';
 import i18n from '@locales/i18n';
 
 // types
-import type { Options, Params, AppAPI } from 'type/app-api';
+import type { Options, Params, AppAPI } from 'global-types/app-api';
 
 class APIMoudle {
   authorized(options?: Partial<Options>) {
