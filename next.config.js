@@ -14,6 +14,29 @@ const nextConfig = {
     // * 여기에 웹팩에 주입될 환경변수들을 입력
   },
 
+  async headers() {
+    return [
+      {
+        // Apply these headers to all routes in your application.
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-XSS-Protection',
+            value: '1; mode=block',
+          },
+          {
+            key: 'X-Frame-Options',
+            value: 'SAMEORIGIN',
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'origin-when-cross-origin',
+          },
+        ],
+      },
+    ];
+  },
+
   // * 이용자에게 제공되는 헤더에 nextjs 로 개발되었음을 노출하지 않습니다.
   poweredByHeader: false,
 
