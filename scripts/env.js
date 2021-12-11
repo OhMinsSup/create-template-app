@@ -1,44 +1,32 @@
 const dotenv = require('dotenv');
 const fs = require('fs');
-const path = require('path');
+const shell = require('shelljs');
+const { getEnvironment } = require('./utils');
 
 process.on('unhandledRejection', (err) => {
   throw err;
 });
 
-function parseEnv(env) {
-  switch (env) {
-    case 'development':
-      return 'development';
-    case 'production':
-      return 'production';
-    case 'local':
-      return 'local';
-    case 'analyze':
-      return 'local.analyze';
-    case 'debug':
-      return 'local.debug';
-    default:
-      throw new Error(`Unknown environment: ${env}`);
-  }
-}
-
-const loadEnv = parseEnv(process.env.LOAD_ENV);
-const envFolderFilePath = path.join(__dirname, `../env/.env.${loadEnv}`);
-const envFilePath = path.join(__dirname, '../.env');
+const { safeEnv, filePath, folderPath } = getEnvironment(process.env.LOAD_ENV);
 
 // load by project environment variables
 const env = dotenv.config({
-  path: envFolderFilePath,
+  path: folderPath,
 });
 
 if (env.error) {
-  console.error(`dotenv loaded environment file errors: .env.${loadEnv}`);
-  console.error(env.error);
-  process.exit(1);
+  console.error(
+    `Error: dotenv loaded environment file errors: .env.${safeEnv}`,
+    env.error,
+  );
+  console.log();
+  shell.exit(1);
+  return;
 }
 
-fs.copyFileSync(envFolderFilePath, envFilePath);
+// env variables copy for env to root folder .env copy
+fs.copyFileSync(folderPath, filePath);
 // success load by project environment variables
-console.log(`success copy by ".env.${loadEnv}" environment variables`);
-process.exit();
+shell.echo(`✨ success copy by ".env.${safeEnv}" environment variables`);
+console.log();
+shell.exit();
