@@ -19,11 +19,22 @@ function parseEnv(env) {
 
 function getEnvironment(env) {
   const safeEnv = parseEnv(env);
-  const folderPath = path.join(__dirname, `../env/.env.${env}`);
+  const copyPath = path.join(__dirname, `./env/.env.${env}`);
   const filePath = path.join(__dirname, '../.env');
   return {
     safeEnv,
-    folderPath,
+    copyPath,
+    filePath,
+  };
+}
+
+function getServerlessYml(env) {
+  const filename = `serverless.${env}.yml`;
+  const copyPath = path.join(__dirname, `./setting/${filename}`);
+  const filePath = path.join(__dirname, '../serverless.yml');
+  return {
+    filename,
+    copyPath,
     filePath,
   };
 }
@@ -31,4 +42,5 @@ function getEnvironment(env) {
 module.exports = {
   parseEnv,
   getEnvironment,
+  getServerlessYml,
 };

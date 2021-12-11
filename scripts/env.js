@@ -1,17 +1,17 @@
 const dotenv = require('dotenv');
 const fs = require('fs');
 const shell = require('shelljs');
-const { getEnvironment } = require('./utils');
+const { getEnvironment, getServerlessYml } = require('./utils');
 
 process.on('unhandledRejection', (err) => {
   throw err;
 });
 
-const { safeEnv, filePath, folderPath } = getEnvironment(process.env.LOAD_ENV);
+const { safeEnv, filePath, copyPath } = getEnvironment(process.env.LOAD_ENV);
 
 // load by project environment variables
 const env = dotenv.config({
-  path: folderPath,
+  path: copyPath,
 });
 
 if (env.error) {
@@ -24,9 +24,10 @@ if (env.error) {
   return;
 }
 
+shell.echo(`copy: .env.${safeEnv} ====> .env`);
 // env variables copy for env to root folder .env copy
-fs.copyFileSync(folderPath, filePath);
+fs.copyFileSync(copyPath, filePath);
 // success load by project environment variables
-shell.echo(`✨ success copy by ".env.${safeEnv}" environment variables`);
+shell.echo(`copy: success`);
 console.log();
 shell.exit();

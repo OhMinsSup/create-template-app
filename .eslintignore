@@ -8,3 +8,4 @@ server/
 .serverless_nextjs
 .next
 out
+scripts

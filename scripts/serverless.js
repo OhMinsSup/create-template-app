@@ -2,20 +2,18 @@ const dotenv = require('dotenv');
 const fs = require('fs');
 const shell = require('shelljs');
 const AWS = require('aws-sdk');
-const { getEnvironment } = require('./utils');
+const { getEnvironment, getServerlessYml } = require('./utils');
 
 process.on('unhandledRejection', (err) => {
   throw err;
 });
 
 async function bootstrap() {
-  const { safeEnv, filePath, folderPath } = getEnvironment(
-    process.env.LOAD_ENV,
-  );
+  const { safeEnv, filePath, copyPath } = getEnvironment(process.env.LOAD_ENV);
 
   // load by project environment variables
   const env = dotenv.config({
-    path: folderPath,
+    path: copyPath,
   });
 
   if (env.error) {
@@ -29,9 +27,9 @@ async function bootstrap() {
   }
   shell.echo(`copy: .env.${safeEnv} ====> .env`);
   // env variables copy for env to root folder .env copy
-  fs.copyFileSync(folderPath, filePath);
+  fs.copyFileSync(copyPath, filePath);
   // success load by project environment variables
-  shell.echo(`copy: success`);
+  shell.echo('copy: success');
   console.log();
 
   shell.echo('set environment variables: aws');
@@ -67,7 +65,25 @@ async function bootstrap() {
 
   shell.echo('remove: .serverless .serverless_nextjs');
   shell.rm('-rf', '.serverless', '.serverless_nextjs');
-  shell.echo(`remove: success`);
+  shell.echo('remove: success');
+
+  const deployGroup = process.env.DEPLOY_GROUP;
+  if (!deployGroup) {
+    console.error('Error: "DEPLOY_GROUP" is not defined');
+    console.log();
+    shell.exit(1);
+    return;
+  }
+
+  const { copyPath: slsCopyPath, filePath: slsFilePath } =
+    getServerlessYml(deployGroup);
+  shell.echo(`copy: serverless.${deployGroup}.yml ====> serverless.yml`);
+  // env variables copy for env to root folder .env copy
+  fs.copyFileSync(slsCopyPath, slsFilePath);
+  // success load by project environment variables
+  shell.echo('copy: success');
+
+  shell.echo('deploy start ====> serverless deploy');
 
   // load AWS SDK
   shell.exit();
