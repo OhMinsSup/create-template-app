@@ -14,39 +14,22 @@ const Head: React.FC<HeadProps> = () => {
         />
         <Script strategy="lazyOnload" id="google-analytics">
           {`
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){
-          window.dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', '${GOOGLE_ANALYTICS_G_TAG}', { 'send_page_view': false });
-        `}
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){
+              window.dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', '${GOOGLE_ANALYTICS_G_TAG}', { 'send_page_view': false });
+          `}
         </Script>
       </>
     );
   };
 
   const renderClientLibs = () => {
-    return (
-      <>
-        <Script
-          src="https://apis.google.com/js/api:client.js"
-          id="google-client"
-          strategy="beforeInteractive"
-        />
-        <Script
-          src="/js/kakao-sdk.js"
-          strategy="beforeInteractive"
-          id="kakao-sdk"
-        />
-        <Script
-          src="https://code.jquery.com/jquery-1.12.4.min.js"
-          id="jquery"
-          strategy="beforeInteractive"
-        />
-      </>
-    );
+    return <></>;
   };
+
   return (
     <>
       {renderGoogleAnalytics()}
