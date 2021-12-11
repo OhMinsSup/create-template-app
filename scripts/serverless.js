@@ -66,6 +66,7 @@ async function bootstrap() {
   shell.echo('remove: .serverless .serverless_nextjs');
   shell.rm('-rf', '.serverless', '.serverless_nextjs');
   shell.echo('remove: success');
+  console.log();
 
   const deployGroup = process.env.DEPLOY_GROUP;
   if (!deployGroup) {
@@ -82,10 +83,12 @@ async function bootstrap() {
   fs.copyFileSync(slsCopyPath, slsFilePath);
   // success load by project environment variables
   shell.echo('copy: success');
+  console.log();
 
-  shell.echo('deploy start ====> serverless deploy');
+  shell.echo('deploy: serverless_nextjs deploy');
+  console.log();
+  shell.exec('yarn next-with-serverless');
 
-  // load AWS SDK
   shell.exit();
 }
 
