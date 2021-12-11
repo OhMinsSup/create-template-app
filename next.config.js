@@ -10,9 +10,9 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * @type {import('next').NextConfig} */
 const nextConfig = {
   // * 리액트 개발 중 사용할 환경변수들을 설정
-  env: {
-    // * 여기에 웹팩에 주입될 환경변수들을 입력
-  },
+  // env: {
+  //   // * 여기에 웹팩에 주입될 환경변수들을 입력
+  // },
 
   async headers() {
     return [
@@ -45,9 +45,9 @@ const nextConfig = {
 
   // experimental: { granularChunks: true },
 
-  images: {
-    domains: [], // 외부 웹사이트 이미지인경우, 이미지 src 의 도메인을 옵션에 명시
-  },
+  // images: {
+  //   domains: [], // 외부 웹사이트 이미지인경우, 이미지 src 의 도메인을 옵션에 명시
+  // },
 
   // https://nextjs.org/docs/basic-features/built-in-css-support#sass-support
   sassOptions: {
