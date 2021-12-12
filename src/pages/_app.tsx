@@ -5,7 +5,7 @@ import 'moment/locale/ko';
 
 import React from 'react';
 
-import AppProvider from '@provider/AppProvider';
+import Provider from '@provider/provider';
 import { SEO } from '@components/common/SEO';
 import { Head } from '@components/common/Head';
 
@@ -37,11 +37,11 @@ function AppPage({ Component, pageProps }: AppProps) {
     <>
       <SEO />
       <Head />
-      <AppProvider>
+      <Provider>
         <Layout pageProps={pageProps}>
           <Component {...pageProps} />
         </Layout>
-      </AppProvider>
+      </Provider>
     </>
   );
 }

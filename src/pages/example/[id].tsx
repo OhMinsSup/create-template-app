@@ -13,6 +13,7 @@ import { api } from '@api/module';
 
 import type { InferGetStaticPropsType } from 'next';
 import type { ExampleSchema } from '@api/schema/example';
+import { SEO } from '@components/common/SEO';
 
 const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
   ssr: false,
@@ -73,9 +74,12 @@ function Post({ post }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (!data) return 'Loading...';
 
   return (
-    <div className="responsive">
-      <PostViewer post={data} />
-    </div>
+    <>
+      <SEO title={`${data.title} | web-boilerplate`} description={data.title} />
+      <div className="responsive">
+        <PostViewer post={data} />
+      </div>
+    </>
   );
 }
 

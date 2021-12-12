@@ -56,15 +56,7 @@ const Home = () => {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Powered by{' '}
-          <span className={styles.logo}>
-            <img
-              src="/images/icon.png"
-              alt="Vercel Logo"
-              width={72}
-              height={16}
-            />
-          </span>
+          Powered by <span className={styles.logo}>vercel</span>
         </a>
       </footer>
     </div>

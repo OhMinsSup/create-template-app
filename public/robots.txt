@@ -1,0 +1,13 @@
+# *
+User-agent: *
+Allow: /
+
+# Baiduspider
+User-agent: Baiduspider
+Disallow: /
+
+# Host
+Host: https://d2rddspxunnkn4.cloudfront.net
+
+# Sitemaps
+Sitemap: https://d2rddspxunnkn4.cloudfront.net/sitemap.xml

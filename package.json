@@ -1,9 +1,10 @@
 {
   "name": "web-boilerplate",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "description": "nextjs boilerplate project",
   "main": "index.tsx",
   "scripts": {
+    "sitemap": "node --experimental-modules scripts/sitemap.mjs",
     "env": "node scripts/env.js",
     "dev": "cross-env LOAD_ENV=local yarn env && next dev",
     "dev:debug": "cross-env LOAD_ENV=debug yarn env && next dev",
@@ -52,7 +53,7 @@
     "react-i18next": "^11.14.3",
     "react-use": "^17.3.1",
     "sass": "^1.44.0",
-    "swr": "^1.1.0",
+    "swr": "^1.1.1",
     "yup": "^0.32.11"
   },
   "devDependencies": {
@@ -68,10 +69,10 @@
     "dotenv": "^10.0.0",
     "eslint": "^8.4.0",
     "eslint-config-next": "^12.0.7",
+    "globby": "^12.0.2",
     "husky": "^7.0.4",
     "jest": "^27.4.3",
     "lint-staged": "^12.1.2",
-    "next-sitemap": "^1.6.203",
     "prettier": "^2.5.1",
     "serverless": "^2.68.0",
     "shelljs": "^0.8.4",
