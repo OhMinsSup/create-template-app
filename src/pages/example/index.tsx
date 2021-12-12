@@ -14,6 +14,7 @@ import { api } from '@api/module';
 // types
 import type { InferGetStaticPropsType } from 'next';
 import type { ExampleSchema } from '@api/schema/example';
+import { SEO } from '@components/common/SEO';
 
 const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
   ssr: false,
@@ -60,17 +61,20 @@ function PostPage({ posts }: InferGetStaticPropsType<typeof getStaticProps>) {
   if (!data) return 'Loading...';
 
   return (
-    <div className="responsive post-list">
-      {data.map((post) => (
-        <Post key={post.id} post={post} />
-      ))}
-      <Pagination
-        page={page}
-        lastPage={10}
-        fetchNextPage={fetchNextPage}
-        fetchPrevPage={fetchPrevPage}
-      />
-    </div>
+    <>
+      <SEO title="포스트 | web-boilerplate" description="포스트 리스트 내용" />
+      <div className="responsive post-list">
+        {data.map((post) => (
+          <Post key={post.id} post={post} />
+        ))}
+        <Pagination
+          page={page}
+          lastPage={10}
+          fetchNextPage={fetchNextPage}
+          fetchPrevPage={fetchPrevPage}
+        />
+      </div>
+    </>
   );
 }
 
