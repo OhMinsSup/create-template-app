@@ -4,6 +4,7 @@
   "description": "nextjs boilerplate project",
   "main": "index.tsx",
   "scripts": {
+    "sitemap": "node --experimental-modules scripts/sitemap.mjs",
     "env": "node scripts/env.js",
     "dev": "cross-env LOAD_ENV=local yarn env && next dev",
     "dev:debug": "cross-env LOAD_ENV=debug yarn env && next dev",
@@ -21,8 +22,7 @@
     "test:watch": "jest --watch",
     "test:ci": "jest --ci",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "prepare": "husky install",
-    "map": "next-sitemap"
+    "prepare": "husky install"
   },
   "sideEffects": false,
   "engines": {
@@ -69,10 +69,10 @@
     "dotenv": "^10.0.0",
     "eslint": "^8.4.0",
     "eslint-config-next": "^12.0.7",
+    "globby": "^12.0.2",
     "husky": "^7.0.4",
     "jest": "^27.4.3",
     "lint-staged": "^12.1.2",
-    "next-sitemap": "^1.6.203",
     "prettier": "^2.5.1",
     "serverless": "^2.68.0",
     "shelljs": "^0.8.4",

@@ -1,7 +1,7 @@
 const dotenv = require('dotenv');
 const fs = require('fs');
 const shell = require('shelljs');
-const { getEnvironment, getServerlessYml } = require('./utils');
+const { getEnvironment } = require('./utils');
 
 process.on('unhandledRejection', (err) => {
   throw err;
