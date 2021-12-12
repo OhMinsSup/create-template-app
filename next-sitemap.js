@@ -1,10 +1,10 @@
 module.exports = {
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL,
+  siteUrl: 'https://d2rddspxunnkn4.cloudfront.net',
   changefreq: 'daily',
   priority: 0.7,
   sitemapSize: 5000,
   generateRobotsTxt: true,
-  exclude: [],
+  // exclude: [],
   // Default transformation function
   robotsTxtOptions: {
     policies: [
