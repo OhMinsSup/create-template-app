@@ -1,8 +1,8 @@
 import React, { useReducer, useMemo } from 'react';
 import { createContext } from '@libs/react-utils';
-import { Action } from './foundations/types';
+import { Action } from './types';
 
-import type { ActionType, UserInfoSchema } from './foundations/types';
+import type { ActionType, UserInfoSchema } from './types';
 
 interface AuthState {
   userInfo: UserInfoSchema | null;

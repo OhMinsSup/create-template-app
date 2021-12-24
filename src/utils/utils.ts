@@ -1,7 +1,7 @@
 import multiavatar from '@multiavatar/multiavatar/esm';
 import qs from 'qs';
 import { STORAGE_KEY } from '@contants/constant';
-import { AxiosError } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 export const makeQueryString = (params: any) =>
   qs.stringify(params, {
@@ -18,7 +18,7 @@ export const getUniqueFilter = (iters: { [key: string]: any }[], key: string) =>
 export function isAxiosError<R = any>(
   error: AxiosError | any,
 ): error is AxiosError<R> {
-  return error && error.isAxiosError && error.response;
+  return error && axios.isAxiosError(error);
 }
 
 export const delay = (ms: number) =>
@@ -73,3 +73,13 @@ export const getUserThumbnail = ({
   )}`;
   return defaultProfile ? svgCode : profileUrl ?? svgCode;
 };
+
+export function canUseDOM(): boolean {
+  return !!(
+    typeof window !== 'undefined' &&
+    window.document &&
+    window.document.createElement
+  );
+}
+
+export const isBrowser = canUseDOM();
