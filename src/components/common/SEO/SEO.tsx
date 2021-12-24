@@ -22,6 +22,10 @@ const SEO: React.FC<SEOProps> = ({
     <Head>
       <title>{title}</title>
       <link rel="canonical" href={siteUrl} />
+      <meta
+        name="google-site-verification"
+        content="o_hvlZD4D-WOe-iltxt6m1volDtfsX_G2ERZ4KK9e9Q"
+      />
       <meta name="description" content={description} />
       <meta property="og:image" content={image} />
       <link

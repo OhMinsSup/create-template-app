@@ -29,5 +29,4 @@ shell.echo(`copy: .env.${safeEnv} ====> .env`);
 fs.copyFileSync(copyPath, filePath);
 // success load by project environment variables
 shell.echo(`copy: success`);
-console.log();
-shell.exit();
+shell.exit(0);
