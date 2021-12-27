@@ -1,20 +1,26 @@
 import React, { useReducer, useMemo } from 'react';
-import { createContext } from '@libs/react-utils';
-import { Action } from './types';
+import { useIsomorphicLayoutEffect } from 'react-use';
 
+import { getToken } from '@utils/utils';
+import { createContext } from '@libs/react-utils';
+
+import { Action } from './types';
 import type { ActionType, UserInfoSchema } from './types';
 
 interface AuthState {
+  isLoggedIn: boolean;
   userInfo: UserInfoSchema | null;
 }
 
 interface AuthContext extends AuthState {
-  authorize: (userInfo: UserInfoSchema) => void;
-  unauthorize: () => void;
+  setUserInfo: (userInfo: UserInfoSchema | null) => void;
+  login: () => void;
+  logout: () => void;
   dispatch: React.Dispatch<ActionType>;
 }
 
 const initialState: AuthState = {
+  isLoggedIn: false,
   userInfo: null,
 };
 
@@ -33,12 +39,17 @@ function reducer(state = initialState, action: ActionType) {
     case Action.LOGIN:
       return {
         ...state,
-        userInfo: action.payload,
+        isLoggedIn: true,
       };
     case Action.LOGOUT:
       return {
         ...state,
-        userInfo: null,
+        isLoggedIn: false,
+      };
+    case Action.SET_USER_INFO:
+      return {
+        ...state,
+        userInfo: action.payload,
       };
     default:
       return state;
@@ -48,23 +59,30 @@ function reducer(state = initialState, action: ActionType) {
 function AuthProvider({ children }: AuthProps) {
   const [state, dispatch] = useReducer(reducer, initialState);
 
-  const authorize = (userInfo: UserInfoSchema) =>
+  const setUserInfo = (userInfo: UserInfoSchema | null) =>
     dispatch({
-      type: Action.LOGIN,
+      type: Action.SET_USER_INFO,
       payload: userInfo,
     });
 
-  const unauthorize = () =>
-    dispatch({
-      type: Action.LOGOUT,
-    });
+  const login = () => dispatch({ type: Action.LOGIN });
+
+  const logout = () => dispatch({ type: Action.LOGOUT });
+
+  useIsomorphicLayoutEffect(() => {
+    if (!state.isLoggedIn) {
+      const token = getToken();
+      if (token) login();
+    }
+  }, [state.isLoggedIn]);
 
   const actions = useMemo(
     () => ({
       ...state,
       dispatch,
-      authorize,
-      unauthorize,
+      login,
+      logout,
+      setUserInfo,
     }),
     [state],
   );

@@ -33,14 +33,14 @@ export const generateAvatar = (avatarKey: string) => {
 };
 
 export const getToken = () => {
-  if (typeof window === 'undefined') return '';
+  if (!isBrowser) return '';
   const token = localStorage.getItem(STORAGE_KEY.TOKEN_KEY);
   if (!token) return '';
   return token;
 };
 
 export const getUserInfo = () => {
-  if (typeof window === 'undefined') return null;
+  if (!isBrowser) return null;
   const token = getToken();
   if (!token) return null;
 

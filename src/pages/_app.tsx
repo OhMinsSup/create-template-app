@@ -8,6 +8,7 @@ import React from 'react';
 import Provider from '@provider/provider';
 import { SEO } from '@components/common/SEO';
 import { Head } from '@components/common/Head';
+import { Core } from '@components/common/Core';
 
 // sentry
 import * as Sentry from '@sentry/browser';
@@ -38,9 +39,11 @@ function AppPage({ Component, pageProps }: AppProps) {
       <SEO />
       <Head />
       <Provider>
-        <Layout pageProps={pageProps}>
-          <Component {...pageProps} />
-        </Layout>
+        <Core>
+          <Layout pageProps={pageProps}>
+            <Component {...pageProps} />
+          </Layout>
+        </Core>
       </Provider>
     </>
   );
