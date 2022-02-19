@@ -9,9 +9,6 @@ import { fetcherData } from '@api/fetcher';
 import useSWR, { useSWRConfig } from 'swr';
 import { useAuthContext } from '@provider/contexts';
 
-// utils
-import { getToken } from '@utils/utils';
-
 import type { Middleware, SWRConfiguration } from 'swr';
 
 export interface UserInfo extends Record<string, any> {}
@@ -26,7 +23,7 @@ const KEY = 'profile';
 const middleware: Middleware = (useSWRNext) => {
   return (key, fetcher, config) => {
     const extendedFetcher = (...args: any[]) => {
-      const token = getToken();
+      const token = null;
       if (!token) {
         return Promise.resolve<any>(null);
       }

@@ -1,5 +1,4 @@
 import React, {
-  useCallback,
   useMemo,
   useState,
   isValidElement,
@@ -59,41 +58,38 @@ export function useAlert() {
   }, []);
 
   // show
-  const showAlert = useCallback(
-    (options: Partial<AlertOptions> = defaultOptions) => {
-      const key = keyRef.current ?? getKeyThenIncreaseKey();
+  const showAlert = (options: Partial<AlertOptions> = defaultOptions) => {
+    const key = keyRef.current ?? getKeyThenIncreaseKey();
 
-      if (!options?.cancelHandler) {
-        options.cancelHandler = () => {
-          alertInstance(false, options);
-        };
-      }
-
-      if (!options?.okHandler) {
-        options.okHandler = () => {
-          alertInstance(false, options);
-        };
-      }
-
-      if (key !== keyRef.current) {
-        keyRef.current = key;
-      }
-
-      const alertOptions = {
-        ...options,
-        key,
+    if (!options?.cancelHandler) {
+      options.cancelHandler = () => {
+        alertInstance(false, options);
       };
+    }
 
-      alertInstance(true, alertOptions);
-      console.log('showAlert:', alertManager);
-    },
-    [],
-  );
+    if (!options?.okHandler) {
+      options.okHandler = () => {
+        alertInstance(false, options);
+      };
+    }
+
+    if (key !== keyRef.current) {
+      keyRef.current = key;
+    }
+
+    const alertOptions = {
+      ...options,
+      key,
+    };
+
+    alertInstance(true, alertOptions);
+    console.log('showAlert:', alertManager);
+  };
 
   // close
-  const closeAlert = useCallback(() => {
+  const closeAlert = () => {
     alertInstance(false, defaultOptions);
-  }, []);
+  };
 
   // current instance
   const getInstance = () =>

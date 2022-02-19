@@ -1,7 +1,6 @@
 import React, { useReducer, useMemo } from 'react';
 import { useIsomorphicLayoutEffect } from 'react-use';
 
-import { getToken } from '@utils/utils';
 import { createContext } from '@libs/react-utils';
 
 import { Action } from './types';
@@ -71,7 +70,7 @@ function AuthProvider({ children }: AuthProps) {
 
   useIsomorphicLayoutEffect(() => {
     if (!state.isLoggedIn) {
-      const token = getToken();
+      const token = null;
       if (token) login();
     }
   }, [state.isLoggedIn]);

@@ -1,12 +1,23 @@
 import qs from 'qs';
 import axios, { AxiosError } from 'axios';
+import { isEmpty } from './assertion';
 
-export const makeQueryString = (params: any) =>
-  qs.stringify(params, {
+export const makeQueryString = (
+  params: any,
+  stringifyOptions?: qs.IStringifyOptions | undefined,
+) => {
+  const options: qs.IStringifyOptions = {
     arrayFormat: 'comma',
     skipNulls: true,
     addQueryPrefix: true,
-  });
+  };
+
+  if (!isEmpty(options)) {
+    Object.assign(options, stringifyOptions);
+  }
+
+  return qs.stringify(params, options);
+};
 
 export const getUniqueFilter = (iters: { [key: string]: any }[], key: string) =>
   Array.from(
