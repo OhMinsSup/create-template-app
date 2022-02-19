@@ -9,3 +9,4 @@ server/
 .next
 out
 scripts
+jest.config.js

@@ -1,20 +1,16 @@
 {
   "name": "web-boilerplate",
-  "version": "1.0.0-beta.4",
+  "version": "1.0.0-beta.5",
   "description": "nextjs boilerplate project",
   "main": "index.tsx",
   "scripts": {
     "serverless": "serverless",
-    "sitemap": "node --experimental-modules scripts/sitemap.mjs",
-    "deploy": "node scripts/serverless.js",
-    "env": "node scripts/env.js",
-    "dev": "cross-env LOAD_ENV=local yarn env && next dev",
-    "dev:debug": "cross-env LOAD_ENV=debug yarn env && next dev",
-    "start": "next start",
+    "cli": "node --experimental-modules ./scripts/run.mjs",
+    "dev": "yarn cli && next",
     "build": "next build",
-    "build:analyze": "cross-env LOAD_ENV=analyze yarn env && yarn build",
-    "deploy:dev": "cross-env LOAD_ENV=development yarn deploy",
-    "deploy:prod": "cross-env LOAD_ENV=production yarn deploy",
+    "dev:debug": "cross-env NODE_OPTIONS='--inspect' dotenv -e .env.local next",
+    "deploy:dev": "yarn cli -e dev -d profile",
+    "deploy:prod": "yarn cli -e prod -d profile",
     "eslint": "next lint",
     "eslint-fix": "next lint --fix",
     "prettier": "prettier --list-different '**/*.{js,jsx,md,ts,tsx}'",
@@ -32,85 +28,53 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@multiavatar/multiavatar": "^1.0.6",
-    "@sentry/browser": "^6.15.0",
-    "@sentry/tracing": "^6.15.0",
-    "antd": "^4.17.2",
-    "axios": "^0.24.0",
+    "@sentry/browser": "^6.17.9",
+    "@sentry/tracing": "^6.17.9",
+    "antd": "^4.18.7",
+    "axios": "^0.26.0",
     "classnames": "^2.3.1",
     "cross-env": "^7.0.3",
     "framer-motion": "^5.4.1",
-    "i18next": "^21.5.4",
-    "i18next-browser-languagedetector": "^6.1.2",
+    "i18next": "^21.6.11",
+    "i18next-browser-languagedetector": "^6.1.3",
     "lodash-es": "^4.17.21",
     "moment": "^2.29.1",
-    "next": "^12.0.7",
+    "next": "^12.1.0",
     "next-compose-plugins": "^2.2.1",
     "next-env": "^1.1.1",
-    "qs": "^6.10.2",
+    "qs": "^6.10.3",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-i18next": "^11.14.3",
-    "react-use": "^17.3.1",
-    "sass": "^1.44.0",
-    "swr": "^1.1.1",
+    "react-i18next": "^11.15.4",
+    "react-use": "^17.3.2",
+    "sass": "^1.49.8",
+    "swr": "^1.2.2",
     "yup": "^0.32.11"
   },
   "devDependencies": {
-    "@next/bundle-analyzer": "^12.0.7",
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
-    "@types/lodash-es": "^4.17.5",
-    "@types/node": "^16.11.11",
+    "@next/bundle-analyzer": "^12.1.0",
+    "@testing-library/jest-dom": "^5.16.2",
+    "@testing-library/react": "^12.1.3",
+    "@types/lodash-es": "^4.17.6",
+    "@types/node": "^17.0.18",
     "@types/qs": "^6.9.7",
-    "@types/react": "^17.0.37",
+    "@types/react": "^17.0.39",
     "@types/react-dom": "^17.0.11",
-    "@typescript-eslint/eslint-plugin": "^5.8.0",
-    "aws-sdk": "^2.1045.0",
-    "dotenv": "^10.0.0",
-    "eslint": "^8.4.0",
-    "eslint-config-next": "^12.0.7",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "aws-sdk": "^2.1077.0",
+    "chalk": "^5.0.0",
+    "commander": "^9.0.0",
+    "dotenv": "^16.0.0",
+    "eslint": "^8.9.0",
+    "eslint-config-next": "^12.1.0",
     "eslint-config-prettier": "^8.3.0",
-    "globby": "^12.0.2",
+    "globby": "^13.1.1",
     "husky": "^7.0.4",
-    "jest": "^27.4.3",
-    "lint-staged": "^12.1.2",
+    "jest": "^27.5.1",
+    "lint-staged": "^12.3.4",
     "prettier": "^2.5.1",
-    "serverless": "^2.68.0",
     "shelljs": "^0.8.5",
-    "typescript": "^4.5.2"
-  },
-  "jest": {
-    "roots": [
-      "<rootDir>/src"
-    ],
-    "collectCoverageFrom": [
-      "**/*.{js,jsx,ts,tsx}",
-      "!**/node_modules/**"
-    ],
-    "setupFilesAfterEnv": [
-      "<rootDir>/setupTests.ts"
-    ],
-    "testMatch": [
-      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
-    ],
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/.next/",
-      "/out/"
-    ],
-    "testEnvironment": "jsdom",
-    "transform": {
-      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest"
-    },
-    "transformIgnorePatterns": [
-      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
-      "^.+\\.module\\.(css|sass|scss)$"
-    ],
-    "moduleNameMapper": {
-      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
-    }
+    "typescript": "^4.5.5"
   },
   "husky": {
     "hooks": {
