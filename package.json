@@ -7,6 +7,7 @@
     "serverless": "serverless",
     "cli": "node --experimental-modules ./scripts/run.mjs",
     "dev": "yarn cli && next",
+    "build": "next build",
     "dev:debug": "cross-env NODE_OPTIONS='--inspect' dotenv -e .env.local next",
     "deploy:dev": "yarn cli -e dev -d profile",
     "deploy:prod": "yarn cli -e prod -d profile",
