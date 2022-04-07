@@ -67,6 +67,7 @@ export const WEB_APP = '@@appWeb';
 
 export const STORAGE_KEY = {
   TOKEN_KEY: `${WEB_APP}/authToken`,
+  REFRESH_KEY: `${WEB_APP}/refreshToken`,
   USER_KEY: `${WEB_APP}/userInfo`,
   TEMP_SOCIAL_KEY: `${WEB_APP}/tempSocialProfile`,
 };
