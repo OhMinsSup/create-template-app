@@ -9,10 +9,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
  * Next Config Options
  * @type {import('next').NextConfig} */
 const nextConfig = {
-  // * 리액트 개발 중 사용할 환경변수들을 설정
-  // env: {
-  //   // * 여기에 웹팩에 주입될 환경변수들을 입력
+  // experimental: {
+  //   outputStandalone: true,
   // },
+
   swcMinify: true,
 
   async headers() {
