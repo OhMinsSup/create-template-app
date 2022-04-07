@@ -1,6 +1,6 @@
 import qs from 'qs';
 import axios, { AxiosError } from 'axios';
-import { isEmpty } from './assertion';
+import { isElement, isEmpty } from './assertion';
 
 export const makeQueryString = (
   params: any,
@@ -46,3 +46,13 @@ export function canUseDOM(): boolean {
 }
 
 export const isBrowser = canUseDOM();
+
+export function getOwnerWindow(node?: Element | null): typeof globalThis {
+  return isElement(node)
+    ? getOwnerDocument(node)?.defaultView ?? window
+    : window;
+}
+
+export function getOwnerDocument(node?: Element | null): Document {
+  return isElement(node) ? node?.ownerDocument ?? document : document;
+}

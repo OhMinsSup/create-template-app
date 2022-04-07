@@ -1,4 +1,4 @@
-declare var gtag: Gtag.Gtag;
+declare const gtag: Gtag.Gtag;
 declare namespace Gtag {
   interface Gtag {
     (

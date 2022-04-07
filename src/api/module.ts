@@ -1,9 +1,11 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
+import omit from 'lodash-es/omit';
 
 // clinet
 import { client } from './client';
 import { STORAGE_KEY } from '@contants/constant';
 import i18n from '@locales/i18n';
+import { isBrowser } from '@utils/utils';
 
 // types
 import type { Options, Params, AppAPI } from 'global-types/app-api';
@@ -15,95 +17,67 @@ class APIMoudle {
     return authorization;
   }
 
-  async deleteResponse<D = any, E = any>({
-    url,
-    headers = {},
-    options = { context: null, fallbackData: null },
-  }: Params) {
+  baseConfig = (
+    config: AxiosRequestConfig | undefined,
+    options: Partial<Options>,
+  ) => {
     const authorization = this.authorized(options);
-    const language = typeof window === 'undefined' ? null : i18n.language;
-    const result = await client.delete<AppAPI<D, E>>(url, {
+    const language = !isBrowser ? null : i18n.language;
+    return {
+      ...(config && omit(config, ['headers'])),
       headers: {
         'Content-Type': 'application/json',
         ...(language && {
           'Accept-Language': language,
         }),
         ...(authorization && {
-          Authorization: authorization,
+          Authorization: `Bearer ${authorization}`,
         }),
-        ...headers,
+        ...(config && config.headers),
       },
-    });
-    return result;
+    };
+  };
+
+  delete<D = any, E = any>({
+    url,
+    config = undefined,
+    options = { context: null, fallbackData: null },
+  }: Params) {
+    return client.delete<AppAPI<D, E>>(url, this.baseConfig(config, options));
   }
 
-  async postResponse<D = any, E = any>({
+  post<D = any, E = any>({
+    url,
+    body,
+    config = undefined,
+    options = { context: null, fallbackData: null },
+  }: Params) {
+    return client.post<AppAPI<D, E>>(
+      url,
+      body,
+      this.baseConfig(config, options),
+    );
+  }
+
+  put<D = any, E = any>({
     url,
     body = {},
-    headers = {},
+    config = undefined,
     options = { context: null, fallbackData: null },
   }: Params) {
-    const authorization = this.authorized(options);
-    const language = typeof window === 'undefined' ? null : i18n.language;
-    const result = await client.post<AppAPI<D, E>>(url, body, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(language && {
-          'Accept-Language': language,
-        }),
-        ...(authorization && {
-          Authorization: authorization,
-        }),
-        ...headers,
-      },
-    });
-    return result;
+    return client.put<AppAPI<D, E>>(
+      url,
+      body,
+      this.baseConfig(config, options),
+    );
   }
 
-  async putResponse<D = any, E = any>({
+  get<D = any, E = any>({
     url,
-    body = {},
-    headers = {},
+    config = undefined,
     options = { context: null, fallbackData: null },
   }: Params) {
-    const authorization = this.authorized(options);
-    const language = typeof window === 'undefined' ? null : i18n.language;
-    const result = await client.put<AppAPI<D, E>>(url, body, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(language && {
-          'Accept-Language': language,
-        }),
-        ...(authorization && {
-          Authorization: authorization,
-        }),
-        ...headers,
-      },
-    });
-    return result;
-  }
-
-  async getResponse<D = any, E = any>({
-    url,
-    headers = {},
-    options = { context: null, fallbackData: null },
-  }: Params) {
-    const isServer = typeof window === 'undefined';
-    const authorization = isServer ? null : this.authorized(options);
-    const language = isServer ? null : i18n.language;
-    const result = await client.get<AppAPI<D, E>>(url, {
-      headers: {
-        'Content-Type': 'application/json',
-        ...(language && {
-          'Accept-Language': language,
-        }),
-        ...(authorization && {
-          Authorization: authorization,
-        }),
-        ...headers,
-      },
-    });
-    return result;
+    return client.get<AppAPI<D, E>>(url, this.baseConfig(config, options));
   }
 
   getMockResponse = <Item = any>(url: string) => {

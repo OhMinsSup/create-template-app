@@ -12,7 +12,7 @@ export const fetcher = async <R = any, E = any>(
     url,
     options,
   };
-  const response = await api.getResponse<R, E>(params);
+  const response = await api.get<R, E>(params);
   return response;
 };
 
@@ -24,6 +24,6 @@ export const fetcherData = async <R = any, E = any>(
     url,
     options,
   };
-  const response = await api.getResponse<R, E>(params);
+  const response = await api.get<R, E>(params);
   return response.data;
 };

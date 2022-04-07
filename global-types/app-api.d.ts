@@ -31,7 +31,7 @@ export interface Options<Data = any> {
 export interface Params<Body = any> {
   url: string;
   body?: Body;
-  headers?: Record<string, string>;
+  config?: AxiosRequestConfig | undefined;
   options?: Options;
 }
 

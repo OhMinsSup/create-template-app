@@ -1,5 +1,8 @@
+import { isBrowser } from '@utils/utils';
+
 function getAnalytics() {
-  return window.gtag ?? null;
+  if (!isBrowser) return null;
+  return (<any>window).gtag ?? null;
 }
 
 const analytics = {
