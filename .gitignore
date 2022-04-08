@@ -126,3 +126,5 @@ dist
 .next
 
 out
+
+lambda/node_modules

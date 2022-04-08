@@ -96,3 +96,7 @@ export function isHTMLElement(el: any): el is HTMLElement {
   const win = el.ownerDocument.defaultView ?? window;
   return el instanceof win.HTMLElement;
 }
+
+export function isPromise<P = any>(value: any): value is Promise<P> {
+  return value instanceof Promise;
+}
