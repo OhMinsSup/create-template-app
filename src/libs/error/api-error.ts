@@ -20,7 +20,7 @@ type ErrorResultData = {
 type ErrorMessagePath = NestedKeyOf<typeof message>;
 
 class ApiError extends Error {
-  constructor(apiError: Record<string, string | number>, ...args: any[]) {
+  constructor(apiError: any, ...args: any[]) {
     super(...args);
     this.name = 'ApiError';
     if (!isEmpty(apiError)) {
