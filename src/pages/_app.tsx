@@ -6,9 +6,8 @@ import 'moment/locale/ko';
 import React from 'react';
 
 import Provider from '@provider/provider';
-import { SEO } from '@components/common/SEO';
-import { Head } from '@components/common/Head';
-import { Core } from '@components/common/Core';
+import { Scripts } from '@components/ui/Scripts';
+import { Core } from '@components/ui/Core';
 
 // sentry
 import * as Sentry from '@sentry/browser';
@@ -36,8 +35,7 @@ function AppPage({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <SEO />
-      <Head />
+      <Scripts />
       <Provider>
         <Core>
           <Layout pageProps={pageProps}>

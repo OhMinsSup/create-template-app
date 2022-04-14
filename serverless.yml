@@ -6,3 +6,6 @@ boilerplate:
     bucketTags: { service: boilerplate-next }
     cloudfront:
       distributionId: E30YQ4T6QSQ1DY
+      defaults:
+        lambda@edge: # added to cloudfront default cache behavior
+          viewer-request: arn:aws:lambda:us-east-1:817461748097:function:Hellojs:2
