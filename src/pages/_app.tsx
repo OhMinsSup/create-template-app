@@ -28,10 +28,21 @@ Sentry.init({
   tracesSampleRate: 1.0,
 });
 
-const Noop: React.FC = ({ children }) => <>{children}</>;
+const Noop: React.FC = ({ children, ...resetProps }) => {
+  const components = React.Children.map(children, (child) => {
+    if (React.isValidElement(child)) {
+      return React.cloneElement(child, resetProps);
+    }
+    return child;
+  });
+
+  return <>{components}</>;
+};
 
 function AppPage({ Component, pageProps }: AppProps) {
   const Layout = (Component as any).Layout || Noop;
+
+  console.log('pageProps', pageProps);
 
   return (
     <>

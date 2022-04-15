@@ -24,7 +24,7 @@ import { SITE_URL } from '@contants/env';
 import { PAGE_ENDPOINTS } from '@contants/constant';
 
 const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
-  ssr: false,
+  ssr: true,
 });
 
 const getServerSidePostProps = async (context: GetServerSidePropsContext) => {
@@ -36,7 +36,6 @@ const getServerSidePostProps = async (context: GetServerSidePropsContext) => {
       if (!id) {
         return {
           props: {
-            userAgent,
             isBotRequest: true,
           },
         };
@@ -70,14 +69,12 @@ const getServerSidePostProps = async (context: GetServerSidePropsContext) => {
         return {
           props: {
             seo,
-            userAgent,
             isBotRequest: true,
           },
         };
       } catch (error) {
         return {
           props: {
-            userAgent,
             isBotRequest: true,
           },
         };
@@ -87,7 +84,6 @@ const getServerSidePostProps = async (context: GetServerSidePropsContext) => {
 
   return {
     props: {
-      userAgent,
       isBotRequest: false,
     },
   };
@@ -95,10 +91,8 @@ const getServerSidePostProps = async (context: GetServerSidePropsContext) => {
 
 function Post({
   seo,
-  userAgent,
   isBotRequest,
 }: InferGetServerSidePropsType<typeof getServerSidePostProps>) {
-  console.log('userAgent =======>', userAgent);
   const router = useRouter();
   const id = router.query.id?.toString() ?? null;
 
@@ -139,6 +133,6 @@ function Post({
 
 export default Post;
 
-Post.Layout = AppLayout;
-
 export const getServerSideProps = getServerSidePostProps;
+
+Post.Layout = AppLayout;

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import dynamic from 'next/dynamic';
 import isbot from 'isbot';
 
@@ -25,7 +25,7 @@ import { PAGE_ENDPOINTS } from '@contants/constant';
 import { DefaultImageUrl, Title } from '@components/ui/Seo/Seo';
 
 const AppLayout = dynamic(() => import('@components/example/AppLayout'), {
-  ssr: false,
+  ssr: true,
 });
 
 const getServerSidePostsProps = (context: GetServerSidePropsContext) => {
@@ -53,7 +53,7 @@ const getServerSidePostsProps = (context: GetServerSidePropsContext) => {
             ],
           },
         };
-
+        console.log(seo);
         return {
           props: {
             seo,
@@ -95,12 +95,9 @@ function PostPage({
     setPage((prev) => prev - 1);
   }, []);
 
-  console.log('data =======>', seo, isBotRequest);
-
   return (
     <>
-      {JSON.stringify(seo)}
-      {seo ? (
+      {seo && isBotRequest ? (
         <Seo {...seo} />
       ) : (
         <Seo
@@ -125,6 +122,6 @@ function PostPage({
 
 export default PostPage;
 
-PostPage.Layout = AppLayout;
-
 export const getServerSideProps = getServerSidePostsProps;
+
+PostPage.Layout = AppLayout;
