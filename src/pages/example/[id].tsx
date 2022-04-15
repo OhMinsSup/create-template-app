@@ -113,21 +113,25 @@ function Post({
     return response;
   };
 
-  const { data, error } = useSWR<ExampleSchema>(getKey, wrappedFetcher);
+  const { data } = useSWR<ExampleSchema>(getKey, wrappedFetcher);
 
   // bot에게 노출되는 seo 정보
   if (seo && isBotRequest) {
-    return <Seo {...seo} />;
+    return (
+      <div>
+        <Seo {...seo} />
+      </div>
+    );
   }
-
-  if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
 
   return (
     <>
-      <Seo title={`${data.title} | web-boilerplate`} description={data.title} />
+      <Seo
+        title={`${data?.title} | web-boilerplate`}
+        description={data?.title}
+      />
       <div className="responsive">
-        <PostViewer post={data} />
+        {data ? <PostViewer post={data} /> : 'Loading...'}
       </div>
     </>
   );
